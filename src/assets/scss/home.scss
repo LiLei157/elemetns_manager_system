@@ -1,0 +1,84 @@
+/* home页面样式 */
+.home{
+    // padding:20px;
+    .user{
+        display: flex;
+        padding-bottom: 20px;
+        margin-bottom:20px;
+        border-bottom: 1px solid #ccc;
+        img{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 40px;
+        }
+        .userinfo{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .username{
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+        }
+        
+    }
+    .localinfo{
+        p{
+            line-height: 28px;
+            font-size: 14px;
+            color:#999;
+            span{
+                margin-left: 60px;
+                color: #666;
+            }
+        }
+    }
+    .num{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .el-card{
+            padding:0;
+            width: 32%;
+            margin-bottom: 20px;
+            /deep/.el-card__body{   // /deep/：el-card组件内部的组件el-card_body中的样式，必须得加上 /deep/
+                padding:0;
+                display:flex;
+                i{
+                    width: 80px;
+                    height: 80px;
+                    text-align: center;
+                    line-height: 80px;
+                    font-size: 30px;
+                    color: #fff;
+                }
+            }
+            .detail{
+                margin-left:15px ;
+                display: flex;
+                flex-direction: column; // flex布局的主轴方向，默认为水平方向
+                justify-content: center;
+                p{
+                    color: #999;
+                    font-size: 14px;
+                }
+                .price{
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                    color:#000
+                }
+            }
+        }
+    }
+    .graph{
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      .el-card{
+          width:48%
+      }  
+    }
+    
+}
