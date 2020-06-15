@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-03 15:57:01
- * @LastEditTime: 2020-05-12 16:21:33
+ * @LastEditTime: 2020-05-14 09:03:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ele-manager\src\components\Table.vue
@@ -77,15 +77,6 @@
           v-model="form[item.model]"
           v-if="item.type === 'switch'"
         ></el-switch>
-        <!-- type类型是radio时，为单选框 -->
-        <!-- <el-radio-group v-if="item.type === 'radio'">
-          <el-radio
-            v-model="form[item.model]"
-            v-for="(child, childIndex) in item.options"
-            :label="child.label"
-            :key="childIndex"
-          ></el-radio>
-        </el-radio-group> -->
 
         <template v-if="item.type === 'radio' && item.model !== 'yj_setting'">
           <el-radio

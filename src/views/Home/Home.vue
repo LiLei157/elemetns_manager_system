@@ -169,6 +169,7 @@ export default {
           this.echartData.order.xdata = res.orderData.date
           //折线图的主要数据
           const order = res.orderData.data
+          console.log('order：', order)
           // console.log(order)
           // 第一步：取出每项数据中所有的key
           let keyarry = Object.keys(order[0])
@@ -180,7 +181,7 @@ export default {
               data: order.map(item => item[key])
             })
           })
-
+          console.log('****************', this.echartData.order)
           // //处理柱状图
           const userdata = res.userData
           // 处理柱状图中x轴数据

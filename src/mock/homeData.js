@@ -12,7 +12,10 @@ export default {
           ES6: Mock.Random.float(100, 8000, 0, 2),
           Redis: Mock.Random.float(100, 8000, 0, 2),
           React: Mock.Random.float(100, 8000, 0, 2),
-          springboot: Mock.Random.float(100, 8000, 0, 2)
+          springboot: Mock.Random.float(100, 8000, 0, 2),
+          Nodejs: Mock.Random.float(100, 7000, 0, 2),
+          koa: Mock.Random.float(100, 9000, 0, 2),
+          express: Mock.Random.float(100, 8000, 0, 2)
         })
       )
     }
@@ -44,6 +47,18 @@ export default {
           {
             name: 'React',
             value: Mock.Random.float(1000, 10000, 0, 2)
+          },
+          {
+            name: 'Nodejs',
+            value: Mock.Random.float(1000, 9900, 0, 2)
+          },
+          {
+            name: 'koa',
+            value: Mock.Random.float(1000, 9000, 0, 2)
+          },
+          {
+            name: 'express',
+            value: Mock.Random.float(1000, 9000, 0, 2)
           }
         ],
         // 柱状图

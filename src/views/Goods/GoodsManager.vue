@@ -1,72 +1,82 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-05 16:42:51
- * @LastEditTime: 2020-05-12 14:48:25
+ * @LastEditTime: 2020-06-12 16:42:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ele-manager\src\views\Goods\GoodsManager.vue
  -->
 <template>
-  <el-card class="el-card">
-    <el-tabs type="border-card">
-      <el-tab-pane label="出售中商品">
-        <common-search
-          @findHandler="findHandler"
-          :goodsList="goodsClassifyList"
-        >
-          <template v-slot:button>
-            <button class="button" @click="addHandler">添加商品</button>
-            <button class="button">复制淘宝，京东，1688，京东</button>
-          </template>
-        </common-search>
-        <!-- table组件 -->
-        <common-table
-          :tableData="saleList"
-          :tableLabel="tableLabel"
-          tableHeight="700"
-          :config="config"
-          @edit="edit"
-        ></common-table>
-      </el-tab-pane>
+  <transition name="el-zoom-in-top">
+    <el-card class="el-card">
+      <el-tabs type="border-card" style="font-size:18px;">
+        <el-tab-pane label="出售中商品">
+          <common-search
+            @findHandler="findHandler"
+            :goodsList="goodsClassifyList"
+          >
+            <template v-slot:button>
+              <button class="button" @click="addHandler">添加商品</button>
+              <button class="button">复制淘宝，京东，1688，京东</button>
+            </template>
+          </common-search>
+          <!-- table组件 -->
+          <common-table
+            :tableData="saleList"
+            :tableLabel="tableLabel"
+            tableHeight="700"
+            :config="config"
+            @edit="edit"
+            @del="delHandler"
+          ></common-table>
+        </el-tab-pane>
 
-      <el-tab-pane label="仓库中商品">
-        <common-search>
-          <template v-slot:button>
-            <button class="button">批量上架</button>
-          </template>
-        </common-search>
-        <common-table
-          :tableData="warehouseList"
-          :tableLabel="tableLabel"
-          :config="config"
-        ></common-table>
-      </el-tab-pane>
+        <el-tab-pane label="仓库中商品">
+          <common-search>
+            <template v-slot:button>
+              <button class="button">批量上架</button>
+            </template>
+          </common-search>
+          <common-table
+            :tableData="warehouseList"
+            :tableLabel="tableLabel"
+            :config="config"
+          ></common-table>
+        </el-tab-pane>
 
-      <el-tab-pane label="已售罄商品">
-        <common-search></common-search>
-        <common-table
-          :tableData="selloutList"
-          :tableLabel="tableLabel"
-          :config="config"
-        ></common-table>
-      </el-tab-pane>
-      <el-tab-pane label="警戒库存">
-        <common-search></common-search>
-        <!-- <common-table></common-table> -->
-      </el-tab-pane>
-    </el-tabs>
-  </el-card>
+        <el-tab-pane label="已售罄商品">
+          <common-search></common-search>
+          <common-table
+            :tableData="selloutList"
+            :tableLabel="tableLabel"
+            :config="config"
+            @change="getList"
+          ></common-table>
+        </el-tab-pane>
+        <el-tab-pane label="警戒库存">
+          <common-search></common-search>
+          <common-table
+            :tableData="alertinventory"
+            :tableLabel="tableLabel"
+            :config="config"
+          ></common-table>
+        </el-tab-pane>
+      </el-tabs>
+      <Loading v-if="isLoading"></Loading>
+    </el-card>
+  </transition>
 </template>
 
 <script>
 // 引入组件
 import CommonSearch from '@/components/CommonSearch'
 import CommonTable from '@/components/CommonTable'
-
+import Loading from '@/components/Loading'
 export default {
   components: {
     CommonSearch,
-    CommonTable
+    CommonTable,
+    Loading
   },
   data() {
     return {
@@ -75,6 +85,7 @@ export default {
       selloutList: [], // 已售罄商品,筛选库存为0的数据
       alertinventory: [], // 警戒库存，筛选库存低于50的数据
       goodsClassifyList: [], // 商品分类
+      isLoading: false,
       config: {
         page: 1,
         total: 20,
@@ -126,9 +137,11 @@ export default {
   },
   mounted() {
     this.getList()
+    console.log('GoodsManager mounted...')
   },
   methods: {
     getList() {
+      this.config.loading = true
       this.$http
         .get('/goods/list')
         .then(res => {
@@ -140,6 +153,12 @@ export default {
           console.log('saleoutList', this.saleList)
           console.log('alertinventory', this.alertinventory)
           this.config.loading = false
+
+          let arr = []
+          arr.push(1)
+          arr.unshift(0)
+          arr.pop(1)
+          arr.shift()
         })
         .catch(error => {
           console.log(error)
@@ -147,13 +166,17 @@ export default {
     },
     // 关键字查询
     findHandler(val) {
+      this.isLoading = true
       console.log(val)
       this.$http
         .post('/goods/find', {
           keywords: val
         })
         .then(res => {
-          this.saleList = res.data.data
+          setTimeout(() => {
+            this.isLoading = false
+            this.saleList = res.data.data
+          }, 2000)
         })
     },
 
@@ -195,6 +218,13 @@ export default {
           classifyList: this.goodsClassifyList,
           form: this.form
         }
+      })
+    },
+    // 删除table表格
+    delHandler() {
+      this.$message({
+        type: 'error',
+        message: '抱歉，您没有权限删除哦!'
       })
     }
   }

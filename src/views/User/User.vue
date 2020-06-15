@@ -155,7 +155,7 @@ export default {
         })
         .then(res => {
           console.log(res)
-          // console.log(this.tableData)
+          console.log('table:', this.tableData)
           this.tableData = res.data.list.map(item => {
             item.sexLabel = item.sex == '0' ? '女' : '男'
             return item

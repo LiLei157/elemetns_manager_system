@@ -19,7 +19,7 @@ export default {
         }
       }
     },
-    // 判断是否是带图表的坐标轴
+    // 判断是否是带xzhou
     isxAxisChart: {
       type: Boolean,
       default: true
@@ -63,11 +63,12 @@ export default {
         legend: {
           textStyle: {
             color: '#333'
-          }
+          },
+          data: []
         },
         // 调整图表偏移
         grid: {
-          left: '20%'
+          left: '10%'
         },
         toolbox: {
           feature: {
@@ -77,7 +78,7 @@ export default {
 
         xAxis: {
           type: 'category',
-          boundaryGap: false,
+          boundaryGap: true,
           data: [],
           // 配置x轴颜色， xAxis.axisLine.lineStyle
           axisLine: {
@@ -85,8 +86,18 @@ export default {
               color: '#17b3a3'
             }
           },
+          // grid: {
+          //   left: '10%',
+          //   bottom: '35%'
+          // },
           axisLabel: {
-            color: '#333'
+            color: '#333',
+            //  让x轴文字方向为竖向
+            // interval: 0,
+            rotate: 30
+            // formatter: function(value) {
+            //   return value.split('').join('\n')
+            // }
           }
         },
         yAxis: [

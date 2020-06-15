@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-19 09:28:01
- * @LastEditTime: 2020-05-08 11:13:55
+ * @LastEditTime: 2020-06-12 14:18:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ele-manager\src\views\Login.vue
@@ -51,6 +51,9 @@ export default {
   },
   methods: {
     submitLogin() {
+      //test..
+      // this.postRequest()
+
       console.log(this.ruleForm)
       this.$http.post('api/login/getMenu', this.ruleForm).then(res => {
         res = res.data

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-11 20:30:10
- * @LastEditTime: 2020-05-12 16:37:42
+ * @LastEditTime: 2020-06-12 16:41:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ele-manager\src\views\Goods\GoodsEidt.vue
@@ -66,6 +66,9 @@
         </el-tab-pane>
       </el-tabs>
     </template>
+    <div class="loading-box" v-show="loading">
+      <img src="images/loading-svg/loading-bars-skyblue.svg" alt="" />
+    </div>
   </div>
 </template>
 
@@ -74,9 +77,10 @@ import Form from '@/components/Form'
 export default {
   data() {
     return {
-      row: this.$route.params.row,
-      form: this.$route.params.form,
+      row: {},
+      form: {},
       classifyList: this.$route.params.classifyList,
+      loading: false,
       activeName: 'first',
       formData: [
         {
@@ -228,13 +232,17 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      rules: {}
     }
   },
   components: {
     Form
   },
   mounted() {
+    console.log('GoodsEdit mounted...')
+    this.row = this.$route.params.row
+    this.form = this.$route.params.form
     console.log(this.row)
     this.formData.map(item => {
       item.type === 'select' ? (item.options = this.classifyList) : ''
@@ -250,10 +258,7 @@ export default {
       }
     },
     saveHandler(type) {
-      // this.$message({
-      //   type: 'warning',
-      //   message: '没有权限访问'
-      // })
+      this.loading = true
       if (type === 1) {
         this.$http
           .post('/goods/add', {
@@ -262,8 +267,11 @@ export default {
           .then(res => {
             console.log(this.form)
             console.log(res)
-            // this.$router.push({ name: 'goodsManager' })
-          })
+            setTimeout(() => {
+              this.loading = false
+              this.$router.push({ name: 'goodsManager' })
+            })
+          }, 3000)
       }
     },
     nextHandler() {
@@ -284,6 +292,15 @@ export default {
     height: 40px;
     line-height: 40px;
     border-bottom: 1px solid #f6f6f6;
+  }
+  .loading-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    img {
+      width: 70px;
+    }
   }
 }
 </style>

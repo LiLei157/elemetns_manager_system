@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-08 11:46:50
- * @LastEditTime: 2020-05-08 13:37:52
- * @LastEditors: your name
+ * @LastEditTime: 2020-06-12 16:42:50
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ele-manager\src\views\Goods\GoodsSpecification.vue
  -->
@@ -11,7 +11,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    console.log('GoodsSpecification mounted..')
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

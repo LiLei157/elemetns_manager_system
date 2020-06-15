@@ -8,7 +8,7 @@
     :collapse="collapse"
   >
     <h3 class="aside-title" v-show="collapse == false">
-      MyVueDemo-课程管理后台系统
+      mini后台管理系统
     </h3>
     <h3 class="aside-title" v-show="collapse == true">
       Demo

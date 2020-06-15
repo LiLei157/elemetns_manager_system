@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-02 18:39:55
- * @LastEditTime: 2020-05-03 21:51:57
+ * @LastEditTime: 2020-06-12 14:13:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ele-manager\src\main.js
@@ -19,12 +19,15 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 第三方库
 import http from '@/api/config.js'
 import './mock'
+import { postRequest } from './api/test'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 // 挂载到vue原型对象上,下次想要使用axios异步请求就可以 $http. 的方式调用
 Vue.prototype.$http = http
 Vue.prototype.$message = ElementUI.Message
+Vue.prototype.postRequest = postRequest
+
 router.beforeEach((to, from, next) => {
   // 防止刷新后vuex里丢失token
   store.commit('getToken')

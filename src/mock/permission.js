@@ -60,10 +60,10 @@ export default {
                     url: 'Goods/GoodsClassify'
                   },
                   {
-                    path: '/GoodsEvaluate',
-                    name: 'GoodsEvaluate',
-                    label: '商品评价',
-                    url: 'Goods/GoodsEvaluate'
+                    path: '/GoodsData',
+                    name: 'GoodsData',
+                    label: '商品数据',
+                    url: 'Goods/GoodsData'
                   },
                   {
                     path: '/GoodsSpecification',
